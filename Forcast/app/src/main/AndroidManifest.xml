@@ -24,6 +24,14 @@
             android:exported="false"/>
         <receiver android:name=".recivers.ResponseReceiver" />
 
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:enabled="true"
+            android:multiprocess="true"
+            android:name=".dbhelper.ForcastProvider"
+            android:exported="true" />
+
+        <receiver android:name=".recivers.ResponseReceiver" />
 
     </application>
 
