@@ -7,6 +7,7 @@ import android.util.Log;
 
 import forcast.celsius.com.forcast.BaseActivity;
 import forcast.celsius.com.forcast.dbhelper.DatabaseHelper;
+import forcast.celsius.com.forcast.jsonoparser.JSONparser;
 import forcast.celsius.com.forcast.network.NetworkHTTPRequests;
 
 /**
@@ -18,13 +19,15 @@ public class ForcastPullService extends IntentService {
 
     private String responce = null;
     private static NetworkHTTPRequests networkHTTPRequests = null;
-    private DatabaseHelper helper = null;
+    private static DatabaseHelper helper = null;
+    private static JSONparser jsonParser = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
         networkHTTPRequests = NetworkHTTPRequests.getInstance();
         helper = BaseActivity.helper;
+        jsonParser = JSONparser.getInstance();
     }
 
     public ForcastPullService(String name) {
@@ -41,12 +44,14 @@ public class ForcastPullService extends IntentService {
             switch (intent.getStringExtra(PullServiceUtils.GET_WEATHER_ACTION_KEY)) {
                 case PullServiceUtils.GET_EXTERNAL_IP_DATA:
                     responce = networkHTTPRequests.getExternalIP();
+                    helper.bulkExternalIPdata(jsonParser.getIpInfoObject(responce));
                     Log.e("ServiceTest","PullServiceUtils.GET_EXTERNAL_IP_DATA - >"+responce);
 
                     break;
 
                 case PullServiceUtils.GET_LOCATION_BY_EXTERNAL_IP_DATA:
                     responce = networkHTTPRequests.getLocationByExternalIP("72.229.28.185");
+                    jsonParser.getGeoLocationObject(responce);
                     Log.e("ServiceTest","PullServiceUtils.GET_LOCATION_BY_EXTERNAL_IP_DATA - >"+responce);
 
                     break;
