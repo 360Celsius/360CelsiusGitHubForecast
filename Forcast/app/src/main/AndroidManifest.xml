@@ -31,8 +31,6 @@
             android:name=".dbhelper.ForcastProvider"
             android:exported="true" />
 
-        <receiver android:name=".recivers.ResponseReceiver" />
-
     </application>
 
 </manifest>

@@ -51,4 +51,7 @@ public class DataBaseHelperContract {
     public static final String SQL_DELETE_ENTRIES_EXTERNAL_IP =
             "DROP TABLE IF EXISTS " + ExternalIP.DATABASE_TABLE_EXTERNAL_IP_TABLE_NAME_KEY;
 
+    public static final String SQL_SELECT_ENTRIES_EXTERNAL_IP =
+            "SELECT  * FROM " + ExternalIP.DATABASE_TABLE_EXTERNAL_IP_TABLE_NAME_KEY + " WHERE "+ ExternalIP._ID;
+
 }

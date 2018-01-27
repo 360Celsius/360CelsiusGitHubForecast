@@ -15,5 +15,8 @@ public class PullServiceUtils {
     public static final String GET_TEN_DAYS_WEATHER_DATA = "GET_TEN_DAYS_WEATHER_DATA";
     public static final String GET_SIXTEEN_DAYS_WEATHER_DATA = "GET_SIXTEEN_DAYS_WEATHER_DATA";
 
+    public static final String GET_WEATHER_DATA = "GET_WEATHER_DATA";
+
+    public static final String GET_EXTERNAL_IP_DATA_FINISHED = "GET_EXTERNAL_IP_DATA_FINISHED";
 
 }

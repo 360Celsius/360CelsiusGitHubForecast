@@ -43,8 +43,17 @@ public class ForcastPullService extends IntentService {
         try {
             switch (intent.getStringExtra(PullServiceUtils.GET_WEATHER_ACTION_KEY)) {
                 case PullServiceUtils.GET_EXTERNAL_IP_DATA:
+
                     responce = networkHTTPRequests.getExternalIP();
                     helper.bulkExternalIPdata(jsonParser.getIpInfoObject(responce));
+                    helper.getExternalIPdata();
+
+
+                    Intent broadcastIntent = new Intent();
+                    broadcastIntent.setAction(PullServiceUtils.GET_WEATHER_DATA);
+                    broadcastIntent.putExtra(PullServiceUtils.GET_WEATHER_ACTION_KEY, PullServiceUtils.GET_EXTERNAL_IP_DATA_FINISHED);
+                    sendBroadcast(broadcastIntent);
+
                     Log.e("ServiceTest","PullServiceUtils.GET_EXTERNAL_IP_DATA - >"+responce);
 
                     break;

@@ -2,6 +2,7 @@ package forcast.celsius.com.forcast.dbhelper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -51,7 +52,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //======================================================   External IP data   ===========================================================
+
     public void bulkExternalIPdata(IpInfoObject ipInfoObject){
+        deleteExternalIPdataTable();
         ContentValues[] ipInfoObjectArr = new ContentValues[1];;
         for(int i=0;i<ipInfoObjectArr.length;i++) {
             ContentValues values = new ContentValues();
@@ -61,7 +65,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(DataBaseHelperContract.ExternalIP.DATABASE_TABLE_EXTERNAL_COUNTRY_COLUMN_ID_KEY, ipInfoObject.getCountry());
             values.put(DataBaseHelperContract.ExternalIP.DATABASE_TABLE_EXTERNAL_LOC_COLUMN_ID_KEY, ipInfoObject.getLoc());
             values.put(DataBaseHelperContract.ExternalIP.DATABASE_TABLE_EXTERNAL_ORG_COLUMN_ID_KEY, ipInfoObject.getOrg());
+            ipInfoObjectArr[i] = values;
         }
         context.getContentResolver().bulkInsert(DataBaseHelperContract.ExternalIP.CONTENT_URI, ipInfoObjectArr);
+    }
+
+    private void deleteExternalIPdataTable(){
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.delete(DataBaseHelperContract.SQL_DELETE_ENTRIES_EXTERNAL_IP, null, null);
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    public IpInfoObject getExternalIPdata(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(DataBaseHelperContract.SQL_SELECT_ENTRIES_EXTERNAL_IP, null);
+
+        IpInfoObject ipInfoObject = new IpInfoObject();
+        try {
+            if (cursor.moveToFirst()) {
+                cursor.getString(cursor.getColumnIndex(DataBaseHelperContract.ExternalIP.DATABASE_TABLE_EXTERNAL_IP_COLUMN_ID_KEY));
+            }
+        }catch (Exception e){
+            e.printStackTrace();;
+        }finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+        return null;
     }
 }
