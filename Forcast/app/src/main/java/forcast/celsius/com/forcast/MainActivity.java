@@ -84,7 +84,13 @@ public class MainActivity extends BaseActivity {
         listView=(ListView)findViewById(R.id.side_menu_list);
 
         dataModels= new ArrayList<>();
-        //dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.side_menu_financials), R.drawable.financials,getResources().getColor(R.color.sliding_menu_financials_bg),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.today), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.tomorrow), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.five_days), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.ten_days), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.sixteen_days), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.settings), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
+        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.credits), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
 
 
         adapter= new SideMenuListCustomAdapter(dataModels,getApplicationContext());

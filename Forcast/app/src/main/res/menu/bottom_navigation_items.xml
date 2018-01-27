@@ -3,21 +3,21 @@
     <item
         android:id="@+id/action_item1"
         android:icon="@drawable/ic_drawer"
-        android:title="A"/>
+        android:title="@string/today"/>
     <item
         android:id="@+id/action_item2"
         android:icon="@drawable/ic_drawer"
-        android:title="B"/>
+        android:title="@string/tomorrow"/>
     <item
         android:id="@+id/action_item3"
         android:icon="@drawable/ic_drawer"
-        android:title="C"/>
+        android:title="@string/five_days"/>
     <item
         android:id="@+id/action_item4"
         android:icon="@drawable/ic_drawer"
-        android:title="D"/>
+        android:title="@string/ten_days"/>
     <item
         android:id="@+id/action_item5"
         android:icon="@drawable/ic_drawer"
-        android:title="E"/>
+        android:title="@string/sixteen_days"/>
 </menu>
