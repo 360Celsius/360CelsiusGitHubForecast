@@ -2,24 +2,25 @@ package forcast.celsius.com.forcast;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import forcast.celsius.com.datamodel.SideMenuItemDataModel;
 import forcast.celsius.com.forcast.listadapter.SideMenuListCustomAdapter;
 import forcast.celsius.com.forcast.services.ForcastPullService;
 import forcast.celsius.com.forcast.services.PullServiceUtils;
+import forcast.celsius.com.forcast.viewhelpers.BottomNavigationViewHelper;
 
 public class MainActivity extends BaseActivity {
 
@@ -30,7 +31,8 @@ public class MainActivity extends BaseActivity {
     private ArrayList<SideMenuItemDataModel> dataModels;
     private ListView listView;
     private View sideMenuShadow;
-    private static SideMenuListCustomAdapter adapter;
+    private SideMenuListCustomAdapter adapter;
+    private BottomNavigationView bottomNavigationView;
 
 
     @Override
@@ -43,6 +45,7 @@ public class MainActivity extends BaseActivity {
         mainView = (RelativeLayout) findViewById(R.id.main_view);
         sideMenuShadow = (View) findViewById(R.id.shadow);
         mainView = (RelativeLayout) findViewById(R.id.main_view);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         setSupportActionBar(toolbar);
 
@@ -98,6 +101,35 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                //selectedFragment = ItemOneFragment.newInstance();
+                                break;
+                            case R.id.action_item2:
+                                //selectedFragment = ItemTwoFragment.newInstance();
+                                break;
+                            case R.id.action_item3:
+                                //selectedFragment = ItemThreeFragment.newInstance();
+                                break;
+                            case R.id.action_item4:
+                                //selectedFragment = ItemTwoFragment.newInstance();
+                                break;
+                            case R.id.action_item5:
+                                //selectedFragment = ItemThreeFragment.newInstance();
+                                break;
+                        }
+//                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                        transaction.replace(R.id.list_view_placeholder, selectedFragment);
+//                        transaction.commit();
+                        return true;
+                    }
+                });
 
 
 
