@@ -24,12 +24,7 @@ import forcast.celsius.com.forcast.viewhelpers.BottomNavigationViewHelper;
 
 public class MainActivity extends BaseActivity {
 
-    private ActionBarDrawerToggle actionBarDrawerToggle;
-    private DrawerLayout drawerLayout;
     private RelativeLayout mainView;
-    private Toolbar toolbar;
-    private ArrayList<SideMenuItemDataModel> dataModels;
-    private ListView listView;
     private View sideMenuShadow;
     private SideMenuListCustomAdapter adapter;
     private BottomNavigationView bottomNavigationView;
@@ -40,73 +35,10 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer);
-        mainView = (RelativeLayout) findViewById(R.id.main_view);
         sideMenuShadow = (View) findViewById(R.id.shadow);
-        mainView = (RelativeLayout) findViewById(R.id.main_view);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
-        setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name){
-
-            public void onDrawerClosed(View view) {
-                supportInvalidateOptionsMenu();
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                supportInvalidateOptionsMenu();
-            }
-
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                super.onDrawerSlide(drawerView, slideOffset);
-                mainView.setTranslationX(slideOffset * drawerView.getWidth());
-                toolbar.setTranslationX(slideOffset * drawerView.getWidth());
-                drawerLayout.bringChildToFront(drawerView);
-                drawerLayout.requestLayout();
-                drawerLayout.setScrimColor(Color.TRANSPARENT);
-            }
-        };
-
-
-
-        toolbar.setNavigationIcon(R.drawable.ic_drawer);
-        //toolbar.setLogo(R.drawable.logo);
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-        listView=(ListView)findViewById(R.id.side_menu_list);
-
-        dataModels= new ArrayList<>();
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.today), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.tomorrow), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.five_days), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.ten_days), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.sixteen_days), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.settings), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-        dataModels.add(new SideMenuItemDataModel(getResources().getString(R.string.credits), R.drawable.ic_drawer,getResources().getColor(R.color.colorPrimary),1));
-
-
-        adapter= new SideMenuListCustomAdapter(dataModels,getApplicationContext());
-
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                SideMenuItemDataModel dataModel= dataModels.get(position);
-                //setSideMenuSeperatorColor(dataModel);
-                //sendServiceRequestBySelectedCategory(dataModel);
-                //setMainViewColor(dataModel);
-
-            }
-        });
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
