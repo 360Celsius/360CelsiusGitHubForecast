@@ -4,7 +4,7 @@
     android:id="@+id/navigation_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#32445C"
+    android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
     <FrameLayout
@@ -16,12 +16,19 @@
         android:layout_marginRight="1dp">
     </FrameLayout>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/navigation"
+        android:background="@color/tab_bar_upper_shadow"/>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/gray"
         app:itemIconTint="@color/nav_item_state_list"
         app:itemTextColor="@color/nav_item_state_list"
         app:menu="@menu/bottom_navigation_items"/>
